@@ -1,0 +1,12 @@
+"""Mensajes que se muestran al usuario (centralizados)."""
+OPCION_INVALIDA = "Opción inválida."
+FUERA_DE_RANGO = "Opción fuera de rango."
+ENTERO_REQUERIDO = "Ingresa un número entero."
+CREDENCIALES_INVALIDAS = "Correo o contraseña incorrectos."
+SIN_INTENTOS = "Superaste el número máximo de intentos."
+SIN_REGISTROS = "(sin registros)"
+ERROR_BD = "No se pudo completar la operación en la base de datos."
+ERROR_CONEXION = ("No se pudo conectar a la base de datos. Revisa que MySQL esté "
+                  "encendido y que los datos de tu archivo .env sean correctos.")
+DESPEDIDA = "¡Hasta luego!"
+CONTRASENA_REQUISITOS = "Mínimo 8 caracteres, con al menos una letra y un número."

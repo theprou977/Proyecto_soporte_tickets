@@ -20,3 +20,15 @@ def correo_valido(valor):
     if not _PATRON_CORREO.match(limpio):
         raise ValueError("El correo no tiene un formato válido.")
     return limpio
+
+
+def contrasena_valida(valor):
+    """Mínimo 8 caracteres, al menos una letra y un número.
+    Bcrypt solo procesa 72 bytes, por eso ese es el máximo."""
+    if valor is None or len(valor) < 8:
+        raise ValueError("La contraseña debe tener al menos 8 caracteres.")
+    if len(valor.encode("utf-8")) > 72:
+        raise ValueError("La contraseña no puede superar los 72 bytes.")
+    if not re.search(r"[A-Za-z]", valor) or not re.search(r"\d", valor):
+        raise ValueError("La contraseña debe incluir al menos una letra y un número.")
+    return valor

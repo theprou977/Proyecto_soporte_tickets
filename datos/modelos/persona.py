@@ -1,34 +1,17 @@
-from abc import ABC, abstractmethod
+from peewee import CharField
 
-from datos.auxiliar.validaciones import texto_requerido
+from datos.modelos.models import ModelBase
 
 
-class Persona(ABC):
-    """Clase base abstracta de Usuario y Tecnico (abstracción + herencia)."""
+class Persona(ModelBase):
+    """Clase base de Usuario y Tecnico (herencia). No tiene tabla propia:
+    sus campos se heredan a las tablas de cada subclase."""
 
-    def __init__(self, nombre, id=None):
-        self._id = id
-        self.nombre = nombre  # pasa por el setter (validación)
+    nombre = CharField(max_length=80)
 
-    @property
-    def id(self):
-        return self._id
-
-    @id.setter
-    def id(self, valor):
-        self._id = valor
-
-    @property
-    def nombre(self):
-        return self._nombre
-
-    @nombre.setter
-    def nombre(self, valor):
-        self._nombre = texto_requerido(valor, "El nombre", 2, 80)
-
-    @abstractmethod
     def rol(self):
         """Cada subclase define su rol (polimorfismo)."""
+        raise NotImplementedError("La subclase debe definir su rol.")
 
     def describir(self):
-        return f"[{self.rol()}] #{self._id} {self._nombre}"
+        return f"[{self.rol()}] #{self.id} {self.nombre}"

@@ -6,8 +6,4 @@ def ahora():
 
 
 def a_texto(fecha):
-    return fecha.isoformat(sep=" ")
-
-
-def desde_texto(texto):
-    return datetime.fromisoformat(texto)
+    return fecha.strftime("%Y-%m-%d %H:%M") if fecha else "-"

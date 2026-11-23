@@ -1,4 +1,4 @@
-"""Punto de entrada: python app.py"""
+"""Atajo: python app.py hace lo mismo que python main.py"""
 from main import main
 
 if __name__ == "__main__":

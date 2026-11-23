@@ -1,29 +1,24 @@
-from datos.auxiliar.validaciones import correo_valido
+from peewee import CharField
+
 from datos.modelos.enums import Prioridad
 from datos.modelos.persona import Persona
-from datos.modelos.ticket import Ticket
 
 
 class Usuario(Persona):
-    def __init__(self, nombre, correo, id=None):
-        super().__init__(nombre, id)
-        self.correo = correo
+    correo = CharField(max_length=120, unique=True)
+    contrasena = CharField(max_length=60, null=True)  # hash Bcrypt, nunca texto plano
 
-    @property
-    def correo(self):
-        return self._correo
-
-    @correo.setter
-    def correo(self, valor):
-        self._correo = correo_valido(valor)
+    class Meta:
+        table_name = "usuarios"
 
     def rol(self):
         return "Usuario"
 
     def describir(self):
-        return f"{super().describir()} <{self._correo}>"
+        return f"{super().describir()} <{self.correo}>"
 
     def generar_ticket(self, descripcion, prioridad=Prioridad.MEDIA):
+        from datos.modelos.ticket import Ticket  # import local: evita ciclo
         if self.id is None:
             raise ValueError("El usuario debe estar guardado para generar tickets.")
-        return Ticket(descripcion, self.id, prioridad)
+        return Ticket(descripcion=descripcion, usuario=self, prioridad=prioridad)
