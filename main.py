@@ -2,7 +2,7 @@
 from peewee import OperationalError
 
 from auxiliares import info_app, mensajes
-from datos.conexion_db import cerrar, inicializar_bd
+from datos.conexion import cerrar, inicializar_bd
 from datos.repositorios.repo_accion import AccionRepositorio
 from datos.repositorios.repo_tecnico import TecnicoRepositorio
 from datos.repositorios.repo_ticket import TicketRepositorio

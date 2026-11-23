@@ -1,6 +1,6 @@
 from peewee import Model
 
-from datos.conexion_db import bd
+from datos.conexion import bd
 
 
 class ModelBase(Model):
